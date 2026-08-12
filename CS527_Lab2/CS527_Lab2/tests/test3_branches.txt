@@ -1,0 +1,12 @@
+% x1=3, x2=7, compute x3 = x1 - x2 (should be negative, -4)
+x1 = 3
+x2 = 7
+x3 = x1 - x2
+BGT .positive
+x4 = 1     % mark as negative branch taken
+BAL .done
+.positive
+x4 = 2     % mark as positive branch taken (should not happen)
+.done
+Write x3, 0
+Write x4, 4
