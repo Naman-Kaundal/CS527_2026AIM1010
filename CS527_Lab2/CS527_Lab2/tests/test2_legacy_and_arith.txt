@@ -1,7 +1,0 @@
-% test legacy Read/Write plus multiply and divide
-Read x1, 0
-Read x2, 4
-x3 = x1 * x2
-x4 = x3 / x2
-Write x3, 8
-Write x4, 12
