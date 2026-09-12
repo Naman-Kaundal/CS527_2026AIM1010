@@ -1,0 +1,48 @@
+x1 = [0]                 % N
+x2 = 9                    % helper
+x2 = x2 * 4                % input array base = 36 (4 + 32 for weights)
+x3 = x1 - 8                 % number of output samples = N - 8
+x4 = 0                       % k, output index
+v7 = [4]                      % load the 8 filter weights once
+x13 = 64
+x13 = x13 * 4               % output base address = 256
+x14 = 100
+x14 = x14 * 4                 % scratch base address = 400 (stays inside the first page)
+.loop
+x5 = x4 - x3
+BEQ .done
+x7 = x4 * 4
+x8 = x2 + x7               % address of input[k]
+v1 = [x8]                    % load input[k..k+7]
+v2 = v1 * v7                  % elementwise multiply by weights
+[x14] = v2                     % spill products to scratch, then sum them
+x9 = 0                          % running sum
+x15 = x14
+x10 = [x15]
+x9 = x9 + x10
+x15 = x15 + 4
+x10 = [x15]
+x9 = x9 + x10
+x15 = x15 + 4
+x10 = [x15]
+x9 = x9 + x10
+x15 = x15 + 4
+x10 = [x15]
+x9 = x9 + x10
+x15 = x15 + 4
+x10 = [x15]
+x9 = x9 + x10
+x15 = x15 + 4
+x10 = [x15]
+x9 = x9 + x10
+x15 = x15 + 4
+x10 = [x15]
+x9 = x9 + x10
+x15 = x15 + 4
+x10 = [x15]
+x9 = x9 + x10
+x12 = x13 + x7
+[x12] = x9
+x4 = x4 + 1
+BAL .loop
+.done

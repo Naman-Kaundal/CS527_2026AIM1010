@@ -1,0 +1,20 @@
+x1 = 0                   % chunk index
+x2 = [0]                 % N
+x3 = x2 / 8               % number of 8-wide chunks
+x4 = 4                     % address of array A
+x5 = x2 * 4                 % size in bytes of one array (4*N)
+x6 = x4 + x5                  % address of array B  = 4 + 4N
+x7 = x6 + x5                   % address of result C = 4 + 8N
+.loop
+x8 = x1 - x3
+BEQ .done
+v1 = [x4]
+v2 = [x6]
+v3 = v1 + v2
+[x7] = v3
+x4 = x4 + 32
+x6 = x6 + 32
+x7 = x7 + 32
+x1 = x1 + 1
+BAL .loop
+.done
